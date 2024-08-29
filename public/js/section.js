@@ -15,7 +15,7 @@ $(document).ready(function () {
         var $fieldElement = $(fieldHtml);
         $("#parent-form").append($fieldElement);
 
-        // Reinitialize draggable and droppable after appending a new section
+        // Reinitialize draggable and droppable after appending a neww sections
         initializeDraggable();
         initializeDroppable();
     });
@@ -359,7 +359,7 @@ $(document).ready(function () {
 
         sessionStorage.setItem('formDataArray', JSON.stringify(formDataArray));
 
-        window.location.href = "/dynamic-form";
+        window.location.href = "/section";
     });
 });
 
