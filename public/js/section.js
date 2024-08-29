@@ -6,9 +6,8 @@ $(document).ready(function () {
         switch (sectionType) {
             case "section":
                 fieldHtml =
-                    '<div class="form-builder mb-4 p-4">' +
-                    '<h5 class="fw-semibold editable-heading">Description Information</h5>' +
-                    '<div class="d-grid gap-3"></div>' +
+                    '<div class="form-builder mb-4 p-4 row">' +
+                    '<h5 class="fw-semibold editable-heading">Untitled Section</h5>' +
                     "</div>";
                 break;
         }
@@ -70,7 +69,7 @@ $(document).ready(function () {
                     '<label class="form-label editable-label" for="multi-line">' +
                     (labelText || "Multi Line") +
                     '</label>' +
-                    '<textarea readonly id="multi-line" name="multi-line" class="form-control cursor-grab" rows="2" style="height: 65px;" placeholder="Multi Line">' +
+                    '<textarea type="textarea" readonly id="multi-line" name="multi-line" class="form-control cursor-grab" rows="2" style="height: 65px;" placeholder="Multi Line">' +
                     '</textarea>' +
                     '</div>';
                 break;
@@ -101,7 +100,7 @@ $(document).ready(function () {
                     '<label class="form-label editable-label" for="pick-list">' +
                     (labelText || "Pick List") +
                     '</label>' +
-                    '<select disabled id="pick-list" name="pick-list" class="form-control cursor-grab">' +
+                    '<select type="select" disabled id="pick-list" name="pick-list" class="form-control cursor-grab">' +
                     '<option value="Option 1">Option 1</option>' +
                     '<option value="Option 2">Option 2</option>' +
                     '</select>' +
@@ -114,7 +113,7 @@ $(document).ready(function () {
                     '<label class="form-label editable-label" for="multi-select">' +
                     (labelText || "Multi-Select") +
                     '</label>' +
-                    '<select disabled id="multi-select" name="multi-select" class="form-control cursor-grab" multiple>' +
+                    '<select type="select" disabled id="multi-select" name="multi-select" class="form-control cursor-grab" multiple>' +
                     '<option value="Option 1">Option 1</option>' +
                     '<option value="Option 2">Option 2</option>' +
                     '</select>' +
@@ -147,7 +146,7 @@ $(document).ready(function () {
                     '<label class="form-label editable-label" for="auto-number">' +
                     (labelText || "Auto-Number") +
                     '</label>' +
-                    '<input readonly type="text" id="auto-number" name="auto-number" class="form-control cursor-grab" />' +
+                    '<input readonly type="number" id="auto-number" name="auto-number" class="form-control cursor-grab" />' +
                     '</div>';
                 break;
         
@@ -331,10 +330,19 @@ $(document).ready(function () {
         // Initialize an array to store form data
         let formDataArray = [];
 
-        const formFields = $('#parent-form input, #parent-form textarea, #parent-form select');
+        // Handle the dynamic headings first
+        $('#parent-form .form-builder').each(function () {
+            const heading = $(this).find('.editable-heading');
+            if (heading.length) {
+                formDataArray.push({
+                    type: 'heading',
+                    label: heading.text()
+                });
+            }
+        });
 
-        // Loop through each form field
-        formFields.each(function () {
+        // Handle the form fields next
+        $('#parent-form input, #parent-form textarea, #parent-form select').each(function () {
             const field = $(this);
             const droppedField = field.closest('.dropped-field');
             const label = droppedField.find('label');
@@ -354,4 +362,5 @@ $(document).ready(function () {
         window.location.href = "/dynamic-form";
     });
 });
+
 
