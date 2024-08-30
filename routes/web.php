@@ -20,6 +20,6 @@ Route::get('/section', function () {
 
 Route::get('/edit-section', function () {
     return view('sections.editSection');
-})->name("");
+})->name("sections.editSection");
 
-Route::get('/dynamic-form', [ModuleController::class, 'showDynamicForm'])->name('dynamic-form');
+Route::get('/section', [ModuleController::class, 'showDynamicForm'])->name('dynamic-form');

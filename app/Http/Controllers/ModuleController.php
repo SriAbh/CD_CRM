@@ -13,7 +13,7 @@ class ModuleController extends Controller
 
     public function showDynamicForm()
     {
-        return view('dynamic-form');
+        return view('sections.section');
     }
     // Creating a new module
     public function createModule(Request $request)
